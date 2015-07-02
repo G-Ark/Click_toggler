@@ -4,7 +4,11 @@ document.addEventListener("click", function(e) {
 	if(req_element == "A")
 	{
 		self.port.emit('new_tab_url', attribute);
-		window.stop();
-		e.preventDefault();
 	}
+	self.port.on("new_tab_cancelled", function(toggle) {
+		if(toggle == true){
+			window.stop();
+			e.preventDefault();
+		}
+	});
 });
