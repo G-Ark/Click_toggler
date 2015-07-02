@@ -5,10 +5,16 @@ document.addEventListener("click", function(e) {
 	{
 		self.port.emit('new_tab_url', attribute);
 	}
-	self.port.on("new_tab_cancelled", function(toggle) {
+	self.port.on("new_tab_condition", function(toggle) {
 		if(toggle == true){
+			console.log("Toggle set to true");
 			window.stop();
-			e.preventDefault();
+			document.addEventListener("ready",function(e){
+				e.preventDefault();
+			});	
+		}
+		if(toggle == false){
+			console.log("Toggle set to false");
 		}
 	});
 });
